@@ -1,22 +1,66 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello Worl</Text>
-      <Text>ANother text</Text>
+  const [enterGoalText, setEnterGoalText] = useState("");
+  const [goals, setGoals] = useState<string[]>([]); // string[] is an array of strings
 
-      <StatusBar style="auto" />
+  function addGoalHandler() {
+    setGoals((currentGoals) => [...currentGoals, enterGoalText]);
+  }
+
+  function addInputHandler(enteredText: string) {
+    setEnterGoalText(enteredText);
+  }
+
+  return (
+    <View style={styles.screen}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="What's Your Goal?"
+          onChangeText={addInputHandler}
+        />
+        <Button title="Add Something" onPress={addGoalHandler} />
+      </View>
+      <View style={styles.goalsContainer}>
+        <Text>List of Goals</Text>
+
+        {goals.map((goal) => (
+          <Text key={goal}>{goal}</Text>
+        ))}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
+    paddingTop: 50,
+    paddingHorizontal: 10,
     flex: 1,
-    backgroundColor: "#fff",
+  },
+
+  inputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "center",
+    marginBottom: 30,
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
+  },
+
+  textInput: {
+    borderWidth: 1,
+    borderColor: "black",
+    width: "60%",
+    marginRight: 10,
+    padding: 8,
+  },
+
+  goalsContainer: {
+    flex: 5,
   },
 });

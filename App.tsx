@@ -1,18 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
+import StartGameScreen from "./screens/GuessScreens/StartGameScreen";
 
 export default function App() {
-  return (
-    <View style={styles.screen}>
-      <Text>App</Text>
-    </View>
-  );
+  return <StartGameScreen />;
 }
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const styles = StyleSheet.create({});
